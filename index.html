@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f6f2">
+    <meta
+      name="description"
+      content="A home for small desktop apps, experiments, and useful little tools."
+    >
+    <title>Deskdrop — little apps, made by me</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+    <script src="apps.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body id="top">
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Deskdrop home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="3" y="3" width="26" height="26" rx="8" fill="currentColor"></rect>
+              <path d="M10 11h12M10 16h8M10 21h5" stroke="#F5F6F2" stroke-width="2" stroke-linecap="round"></path>
+              <circle cx="22" cy="21" r="2" fill="#B6F36A"></circle>
+            </svg>
+          </span>
+          <span>deskdrop<span class="brand-period">.</span></span>
+        </a>
+        <a class="topbar-link" href="#apps">
+          Browse apps
+          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none">
+            <path d="M3.5 8h9m-3.5-3.5L12.5 8 9 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="status-dot"></span> A small corner of the internet</div>
+            <h1 id="hero-title">Little apps.<br><span>Big “what if?”</span></h1>
+            <p class="hero-description">
+              A collection of desktop experiments, handy tools, and things I made just to see if I could.
+            </p>
+            <a class="hero-cta" href="#apps">
+              Explore the collection
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="orbit orbit-three"></div>
+            <div class="orbit-center">
+              <svg viewBox="0 0 92 92" fill="none">
+                <rect x="13" y="17" width="66" height="51" rx="7" fill="#1E2924"></rect>
+                <path d="M13 25a8 8 0 0 1 8-8h50a8 8 0 0 1 8 8v5H13v-5Z" fill="#DCE6DA"></path>
+                <circle cx="21" cy="23" r="1.5" fill="#A8B6A9"></circle>
+                <circle cx="27" cy="23" r="1.5" fill="#A8B6A9"></circle>
+                <circle cx="33" cy="23" r="1.5" fill="#A8B6A9"></circle>
+                <path d="M27 41h23M27 48h38M27 55h16" stroke="#B6F36A" stroke-width="3" stroke-linecap="round"></path>
+                <path d="M37 70h18m-9-2v7m-13 0h26" stroke="#1E2924" stroke-width="3" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <span class="art-spark spark-one">✳</span>
+            <span class="art-spark spark-two">✦</span>
+            <span class="art-label">made with curiosity</span>
+          </div>
+          <div class="hero-note"><span>01</span><span>PERSONAL SOFTWARE SHELF</span></div>
+        </section>
+
+        <section class="collection" id="apps" aria-labelledby="collection-title">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow section-eyebrow">THE COLLECTION</div>
+              <h2 id="collection-title">Find your next <span>favorite.</span></h2>
+            </div>
+            <p class="collection-count" id="app-count" aria-live="polite"></p>
+          </div>
+
+          <div class="toolbar">
+            <div class="filters" id="filters" aria-label="Filter apps by platform"></div>
+            <label class="search-box">
+              <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+                <circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.5"></circle>
+                <path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+              </svg>
+              <span class="visually-hidden">Search apps</span>
+              <input id="search" type="search" placeholder="Search apps..." autocomplete="off">
+              <kbd>/</kbd>
+            </label>
+          </div>
+
+          <div class="app-grid" id="app-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="about-strip" aria-label="About this collection">
+          <div class="about-icon" aria-hidden="true">✳</div>
+          <div>
+            <h2>Made for the joy of making.</h2>
+            <p>These are little side projects, built to learn something new and hopefully make your day a tiny bit easier.</p>
+          </div>
+          <span class="about-decoration" aria-hidden="true">✳</span>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <a class="brand footer-brand" href="./">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="3" y="3" width="26" height="26" rx="8" fill="currentColor"></rect>
+              <path d="M10 11h12M10 16h8M10 21h5" stroke="#F5F6F2" stroke-width="2" stroke-linecap="round"></path>
+              <circle cx="22" cy="21" r="2" fill="#B6F36A"></circle>
+            </svg>
+          </span>
+          <span>deskdrop<span class="brand-period">.</span></span>
+        </a>
+        <p>Made with curiosity <span aria-hidden="true">✳</span></p>
+        <a class="back-to-top" href="#top">Back to top ↑</a>
+      </footer>
+    </div>
+  </body>
+</html>
