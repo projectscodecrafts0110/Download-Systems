@@ -43,8 +43,8 @@
   if (isLocalInstaller) {
     downloadLink.setAttribute("download", file.split("/").pop());
   } else {
-    countdownIntro.textContent = "The GitHub release page will open automatically in";
-    continueLabel.textContent = "Open release page";
+    countdownIntro.textContent = "Your download will start automatically in";
+    continueLabel.textContent = "Download now";
   }
 
   let secondsRemaining = 8;

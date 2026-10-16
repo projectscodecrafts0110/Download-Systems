@@ -26,7 +26,7 @@ window.APP_LIST = [
     releases: [
       {
         version: "3.6.0 Server",
-        downloadUrl: "./downloads/Equipment/EquipmentInventory-Server-3.6.0-Setup.exe",
+        downloadUrl: "https://github.com/projectscodecrafts0110/Download-Systems/releases/download/v3.6.0-Server/EquipmentInventory-Server-3.6.0-Setup.exe",
       },
     ],
     category: "Equipment Inventory",
@@ -41,7 +41,7 @@ window.APP_LIST = [
     releases: [
       {
         version: "3.6.0 Client",
-        downloadUrl: "./downloads/Equipment/EquipmentInventory-Client-3.6.0-Setup.exe",
+        downloadUrl: "https://github.com/projectscodecrafts0110/Download-Systems/releases/download/v3.6.0-Desktop/EquipmentInventory-Desktop-3.6.0-Setup.exe",
       },
     ],
     category: "Equipment Inventory",
