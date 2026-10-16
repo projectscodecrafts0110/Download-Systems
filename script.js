@@ -22,6 +22,51 @@
       return entities[character];
     });
 
+  const getReleases = (app) => {
+    if (Array.isArray(app.releases)) {
+      return app.releases.filter((release) => release && release.version);
+    }
+    return app.version
+      ? [
+          {
+            version: app.version,
+            date: app.releaseDate,
+            notes: app.releaseNotes,
+            downloadUrl: app.downloadUrl,
+          },
+        ]
+      : [];
+  };
+
+  const getDownloadHref = (appName, downloadUrl) =>
+    `./download.html?${new URLSearchParams({
+      app: appName || "Desktop app",
+      file: downloadUrl,
+    }).toString()}`;
+
+  const renderRelease = (release, index, appName) => {
+    const notes = Array.isArray(release.notes)
+      ? release.notes
+      : typeof release.notes === "string"
+        ? [release.notes]
+        : [];
+
+    return `
+      <li class="release-entry">
+        <div class="release-heading">
+          <strong>v${escapeHtml(release.version)}</strong>
+          ${index === 0 ? '<span class="latest-badge">LATEST</span>' : ""}
+          ${release.date ? `<time>${escapeHtml(release.date)}</time>` : ""}
+        </div>
+        ${notes.length
+          ? `<ul class="release-notes">${notes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}</ul>`
+          : ""}
+        ${release.downloadUrl
+          ? `<a class="release-download" href="${escapeHtml(getDownloadHref(appName, release.downloadUrl))}">Download this version <span aria-hidden="true">↓</span></a>`
+          : '<span class="release-unavailable">Download unavailable</span>'}
+      </li>`;
+  };
+
   const renderFilters = () => {
     filters.innerHTML = platforms
       .map(
@@ -39,13 +84,13 @@
     const platformLabel = (app.platforms || []).join(" · ");
     const status = app.status || "Available";
     const icon = app.icon || "▦";
-    const downloadHref = app.downloadUrl
-      ? `./download.html?${new URLSearchParams({
-          app: app.name || "Desktop app",
-          file: app.downloadUrl,
-        }).toString()}`
+    const releases = getReleases(app);
+    const latestRelease = releases[0];
+    const appName = app.name || "Untitled app";
+    const downloadHref = latestRelease?.downloadUrl
+      ? getDownloadHref(appName, latestRelease.downloadUrl)
       : "#";
-    const isDownloadable = Boolean(app.downloadUrl);
+    const isDownloadable = Boolean(latestRelease?.downloadUrl);
 
     return `
       <article class="app-card">
@@ -60,9 +105,9 @@
         <div class="card-content">
           <div class="app-meta">
             <span>${escapeHtml(platformLabel || "Desktop")}</span>
-            ${app.version ? `<span class="meta-divider">·</span><span>v${escapeHtml(app.version)}</span>` : ""}
+            ${latestRelease?.version ? `<span class="meta-divider">·</span><span>v${escapeHtml(latestRelease.version)}</span>` : ""}
           </div>
-          <h3>${escapeHtml(app.name || "Untitled app")}</h3>
+          <h3>${escapeHtml(appName)}</h3>
           <p>${escapeHtml(app.description || "")}</p>
         </div>
         <div class="card-bottom">
@@ -76,6 +121,12 @@
             </svg>
           </a>
         </div>
+        ${releases.length
+          ? `<details class="release-history">
+              <summary>Release history <span>(${releases.length})</span></summary>
+              <ol>${releases.map((release, index) => renderRelease(release, index, appName)).join("")}</ol>
+            </details>`
+          : ""}
       </article>`;
   };
 

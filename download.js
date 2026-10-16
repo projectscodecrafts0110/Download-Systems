@@ -2,11 +2,22 @@
   const appName = document.querySelector("#app-name");
   const downloadLink = document.querySelector("#download-now");
   const countdownLabel = document.querySelector("#countdown");
+  const countdownIntro = document.querySelector("#countdown-intro");
+  const continueLabel = document.querySelector("#continue-label");
   const status = document.querySelector("#download-status");
   const cancelButton = document.querySelector("#cancel-download");
   const error = document.querySelector("#download-error");
 
-  if (!appName || !downloadLink || !countdownLabel || !status || !cancelButton || !error) {
+  if (
+    !appName ||
+    !downloadLink ||
+    !countdownLabel ||
+    !countdownIntro ||
+    !continueLabel ||
+    !status ||
+    !cancelButton ||
+    !error
+  ) {
     return;
   }
 
@@ -14,7 +25,13 @@
   const name = params.get("app");
   const file = params.get("file");
 
-  if (!file || !/^\.\/downloads\/[A-Za-z0-9][A-Za-z0-9._-]*\.exe$/i.test(file)) {
+  const localInstallerPattern =
+    /^\.\/downloads\/(?:[A-Za-z0-9_-][A-Za-z0-9._-]*\/)*[A-Za-z0-9][A-Za-z0-9._-]*\.exe$/i;
+  const githubReleasePattern = /^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/releases(?:\/[A-Za-z0-9._/-]*)?$/i;
+  const isLocalInstaller = Boolean(file && localInstallerPattern.test(file));
+  const isGithubRelease = Boolean(file && githubReleasePattern.test(file));
+
+  if (!isLocalInstaller && !isGithubRelease) {
     status.hidden = true;
     cancelButton.hidden = true;
     error.hidden = false;
@@ -23,7 +40,12 @@
 
   appName.textContent = name || "This app";
   downloadLink.href = file;
-  downloadLink.setAttribute("download", file.slice("./downloads/".length));
+  if (isLocalInstaller) {
+    downloadLink.setAttribute("download", file.split("/").pop());
+  } else {
+    countdownIntro.textContent = "The GitHub release page will open automatically in";
+    continueLabel.textContent = "Open release page";
+  }
 
   let secondsRemaining = 8;
   const timer = window.setInterval(() => {
@@ -35,6 +57,14 @@
       window.location.assign(file);
     }
   }, 1000);
+
+  downloadLink.addEventListener("click", () => {
+    window.clearInterval(timer);
+    status.textContent = isLocalInstaller
+      ? "Download requested. Check your browser’s downloads if it does not start."
+      : "Opening the GitHub release page.";
+    cancelButton.hidden = true;
+  });
 
   cancelButton.addEventListener("click", () => {
     window.clearInterval(timer);

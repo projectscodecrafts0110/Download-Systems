@@ -415,6 +415,112 @@ p {
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
+.release-history {
+  margin-top: 14px;
+  padding-top: 11px;
+  border-top: 1px solid #eff1ed;
+}
+
+.release-history summary {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 5px;
+  color: #65775d;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 700;
+  list-style: none;
+}
+
+.release-history summary::-webkit-details-marker {
+  display: none;
+}
+
+.release-history summary::before {
+  content: "+";
+  color: #8ba477;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.release-history[open] summary::before {
+  content: "−";
+}
+
+.release-history summary span {
+  color: #90988e;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.release-history ol {
+  display: grid;
+  gap: 0;
+  margin: 7px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.release-entry {
+  padding: 10px 0;
+  border-top: 1px solid #f0f2ee;
+}
+
+.release-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #465244;
+  font-family: var(--mono);
+  font-size: 10px;
+}
+
+.release-heading time {
+  margin-left: auto;
+  color: #929990;
+  font-size: 9px;
+}
+
+.latest-badge {
+  padding: 3px 5px;
+  border-radius: 3px;
+  background: #eef5e8;
+  color: #6f8d59;
+  font-size: 8px;
+}
+
+.release-notes {
+  display: grid;
+  gap: 4px;
+  margin: 7px 0 0;
+  padding-left: 14px;
+  color: #828a81;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.release-download,
+.release-unavailable {
+  display: inline-block;
+  margin-top: 7px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.release-download {
+  color: #536b46;
+}
+
+.release-download:hover {
+  color: #789d55;
+}
+
+.release-unavailable {
+  color: #a3aaa1;
+}
+
 .app-card:hover {
   transform: translateY(-3px);
   border-color: #d9e1d2;
