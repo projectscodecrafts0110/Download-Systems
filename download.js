@@ -27,11 +27,15 @@
 
   const localInstallerPattern =
     /^\.\/downloads\/(?:[A-Za-z0-9_-][A-Za-z0-9._-]*\/)*[A-Za-z0-9][A-Za-z0-9._-]*\.exe$/i;
-  const githubReleasePattern = /^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/releases(?:\/[A-Za-z0-9._/-]*)?$/i;
+  const githubReleaseAssetPattern =
+    /^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/releases\/download\/[^/?#]+\/[^/?#]+(?:\?[^#]*)?$/i;
+  const githubReleasePagePattern =
+    /^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/releases(?:\/(?:tag|latest)(?:\/[^/?#]+)?)?\/?$/i;
   const isLocalInstaller = Boolean(file && localInstallerPattern.test(file));
-  const isGithubRelease = Boolean(file && githubReleasePattern.test(file));
+  const isGithubReleaseAsset = Boolean(file && githubReleaseAssetPattern.test(file));
+  const isGithubReleasePage = Boolean(file && githubReleasePagePattern.test(file));
 
-  if (!isLocalInstaller && !isGithubRelease) {
+  if (!isLocalInstaller && !isGithubReleaseAsset && !isGithubReleasePage) {
     status.hidden = true;
     cancelButton.hidden = true;
     error.hidden = false;
@@ -42,9 +46,12 @@
   downloadLink.href = file;
   if (isLocalInstaller) {
     downloadLink.setAttribute("download", file.split("/").pop());
-  } else {
+  } else if (isGithubReleaseAsset) {
     countdownIntro.textContent = "Your download will start automatically in";
     continueLabel.textContent = "Download now";
+  } else {
+    countdownIntro.textContent = "The GitHub release page will open automatically in";
+    continueLabel.textContent = "Open release page";
   }
 
   let secondsRemaining = 8;
@@ -54,15 +61,18 @@
 
     if (secondsRemaining <= 0) {
       window.clearInterval(timer);
+      status.textContent = isGithubReleasePage
+        ? "Opening the GitHub release page."
+        : "Starting download...";
       window.location.assign(file);
     }
   }, 1000);
 
   downloadLink.addEventListener("click", () => {
     window.clearInterval(timer);
-    status.textContent = isLocalInstaller
-      ? "Download requested. Check your browser’s downloads if it does not start."
-      : "Opening the GitHub release page.";
+    status.textContent = isGithubReleasePage
+      ? "Opening the GitHub release page."
+      : "Download requested. Check your browser’s downloads if it does not start.";
     cancelButton.hidden = true;
   });
 
