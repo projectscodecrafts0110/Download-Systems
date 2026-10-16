@@ -89,13 +89,27 @@
     const platformLabel = (app.platforms || []).join(" · ");
     const status = app.status || "Available";
     const icon = app.icon || "▦";
+    const websiteUrl =
+      app.type === "website" && /^https:\/\//i.test(app.websiteUrl || "")
+        ? app.websiteUrl
+        : null;
     const releases = getReleases(app);
     const latestRelease = releases[0];
     const appName = app.name || "Untitled app";
-    const downloadHref = latestRelease?.downloadUrl
+    const downloadHref = websiteUrl
+      ? websiteUrl
+      : latestRelease?.downloadUrl
       ? getDownloadHref(appName, latestRelease.downloadUrl)
       : "#";
-    const isDownloadable = Boolean(latestRelease?.downloadUrl);
+    const isDownloadable = !websiteUrl && Boolean(latestRelease?.downloadUrl);
+    const actionLabel = websiteUrl
+      ? "Visit website"
+      : isDownloadable
+        ? "Get app"
+        : "Coming soon";
+    const actionIcon = websiteUrl
+      ? '<path d="M9 3h4v4m-.5-3.5L7 9m5-1v4.5a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 3 12.5v-6A1.5 1.5 0 0 1 4.5 5H9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>'
+      : '<path d="M8 2.5v7m0 0 2.7-2.7M8 9.5 5.3 6.8M3 10.5v2A1.5 1.5 0 0 0 4.5 14h7a1.5 1.5 0 0 0 1.5-1.5v-2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>';
 
     return `
       <article class="app-card">
@@ -109,7 +123,7 @@
         </div>
         <div class="card-content">
           <div class="app-meta">
-            <span>${escapeHtml(platformLabel || "Desktop")}</span>
+            <span>${escapeHtml(platformLabel || (websiteUrl ? "Website" : "Desktop"))}</span>
             ${latestRelease?.version ? `<span class="meta-divider">·</span><span>v${escapeHtml(latestRelease.version)}</span>` : ""}
           </div>
           <h3>${escapeHtml(appName)}</h3>
@@ -117,12 +131,12 @@
         </div>
         <div class="card-bottom">
           <span class="app-category">${escapeHtml(app.category || "Utility")}</span>
-          <a class="download-link${isDownloadable ? "" : " link-disabled"}"
-            href="${escapeHtml(downloadHref)}"${isDownloadable ? "" : ' aria-disabled="true" tabindex="-1"'}
-            ${isDownloadable ? `aria-label="Get ${escapeHtml(app.name || "app")}"` : 'aria-label="Download link not set" title="Add a downloadUrl in apps.js"'} >
-            ${isDownloadable ? "Get app" : "Coming soon"}
+          <a class="download-link${isDownloadable || websiteUrl ? "" : " link-disabled"}"
+            href="${escapeHtml(downloadHref)}"${websiteUrl ? ' target="_blank" rel="noopener noreferrer"' : isDownloadable ? "" : ' aria-disabled="true" tabindex="-1"'}
+            ${websiteUrl || isDownloadable ? `aria-label="${escapeHtml(actionLabel)}: ${escapeHtml(appName)}"` : 'aria-label="Download link not set" title="Add a downloadUrl in apps.js"'} >
+            ${escapeHtml(actionLabel)}
             <svg aria-hidden="true" viewBox="0 0 16 16" fill="none">
-              <path d="M8 2.5v7m0 0 2.7-2.7M8 9.5 5.3 6.8M3 10.5v2A1.5 1.5 0 0 0 4.5 14h7a1.5 1.5 0 0 0 1.5-1.5v-2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+              ${actionIcon}
             </svg>
           </a>
         </div>

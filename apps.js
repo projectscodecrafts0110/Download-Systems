@@ -1,4 +1,4 @@
-// Add your desktop apps here. See README.md for the fields and download-link tips.
+// Add company software and websites here. See README.md for entry formats.
 window.APP_LIST = [
   {
     name: "Front Desk System",
@@ -18,6 +18,17 @@ window.APP_LIST = [
     status: "Preview",
     icon: "⌂",
     iconBackground: "#e8eee4",
+  },
+  {
+    name: "Citylight Hotel Baguio",
+    description: "An improved website for Citylight Hotel Baguio, bringing hotel information and the guest experience together online.",
+    type: "website",
+    platforms: ["Website"],
+    websiteUrl: "https://citylight-hotel-preview.bhs-mis-tech.workers.dev/",
+    category: "Hotel Website",
+    status: "Preview",
+    icon: "↗",
+    iconBackground: "#fff0e5",
   },
   {
     name: "Equipment Inventory Server",

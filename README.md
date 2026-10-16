@@ -4,7 +4,7 @@ A responsive, web-based software repository for Baguio Holiday Supermart. Browse
 
 The Baguio Holiday Supermart logo is stored at `assets/bhs-logo.png`.
 
-## Add an app
+## Add software or a website
 
 Edit `apps.js` and add an object to `window.APP_LIST`:
 
@@ -44,6 +44,19 @@ window.APP_LIST = [
 - Keep each version's installer at a distinct path so adding a newer release does not replace older downloads. GitHub limits individual repository files to 100 MB; use GitHub Releases for larger installers.
 - Download buttons for local `.exe` files open a testing reminder first, then start the download after eight seconds. Visitors can download immediately or cancel the automatic download. Keep the reminder accurate for the app's current testing status.
 - Older app entries using top-level `version` and `downloadUrl` are still supported; add a `releases` array when you want to track release history.
+- To list a company website, use `type: "website"`, `platforms: ["Website"]`, and an HTTPS `websiteUrl`. The catalog shows **Visit website** and opens the external site in a new tab, without routing it through the installer reminder.
+
+  ```js
+  {
+    name: "Citylight Hotel Baguio",
+    description: "An improved website for Citylight Hotel Baguio.",
+    type: "website",
+    platforms: ["Website"],
+    websiteUrl: "https://example.com/",
+    category: "Hotel Website",
+    status: "Preview",
+  }
+  ```
 - The download reminder asks for a password before showing the download button. To configure the prompt, generate a SHA-256 hash in your browser console with:
 
   ```js
