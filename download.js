@@ -4,6 +4,10 @@
   const countdownLabel = document.querySelector("#countdown");
   const countdownIntro = document.querySelector("#countdown-intro");
   const continueLabel = document.querySelector("#continue-label");
+  const accessForm = document.querySelector("#access-form");
+  const accessPassword = document.querySelector("#access-password");
+  const accessFeedback = document.querySelector("#access-feedback");
+  const downloadUnlocked = document.querySelector("#download-unlocked");
   const status = document.querySelector("#download-status");
   const cancelButton = document.querySelector("#cancel-download");
   const error = document.querySelector("#download-error");
@@ -14,6 +18,10 @@
     !countdownLabel ||
     !countdownIntro ||
     !continueLabel ||
+    !accessForm ||
+    !accessPassword ||
+    !accessFeedback ||
+    !downloadUnlocked ||
     !status ||
     !cancelButton ||
     !error
@@ -36,16 +44,16 @@
   const isGithubReleasePage = Boolean(file && githubReleasePagePattern.test(file));
 
   if (!isLocalInstaller && !isGithubReleaseAsset && !isGithubReleasePage) {
-    status.hidden = true;
+    accessForm.hidden = true;
     cancelButton.hidden = true;
     error.hidden = false;
+    downloadUnlocked.hidden = false;
     return;
   }
 
   appName.textContent = name || "This app";
-  downloadLink.href = file;
   if (isLocalInstaller) {
-    downloadLink.setAttribute("download", file.split("/").pop());
+    downloadLink.dataset.filename = file.split("/").pop();
   } else if (isGithubReleaseAsset) {
     countdownIntro.textContent = "Your download will start automatically in";
     continueLabel.textContent = "Download now";
@@ -54,19 +62,62 @@
     continueLabel.textContent = "Open release page";
   }
 
-  let secondsRemaining = 8;
-  const timer = window.setInterval(() => {
-    secondsRemaining -= 1;
+  let timer;
+  const startCountdown = () => {
+    let secondsRemaining = 8;
+    status.hidden = false;
     countdownLabel.textContent = String(secondsRemaining);
+    timer = window.setInterval(() => {
+      secondsRemaining -= 1;
+      countdownLabel.textContent = String(secondsRemaining);
 
-    if (secondsRemaining <= 0) {
-      window.clearInterval(timer);
-      status.textContent = isGithubReleasePage
-        ? "Opening the GitHub release page."
-        : "Starting download...";
-      window.location.assign(file);
+      if (secondsRemaining <= 0) {
+        window.clearInterval(timer);
+        status.textContent = isGithubReleasePage
+          ? "Opening the GitHub release page."
+          : "Starting download...";
+        window.location.assign(file);
+      }
+    }, 1000);
+  };
+
+  accessForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const expectedHash = window.DOWNLOAD_PASSWORD_HASH;
+
+    if (!expectedHash || expectedHash === "REPLACE_WITH_SHA256_HASH") {
+      accessFeedback.textContent =
+        "Download access has not been configured. Contact the repository maintainer.";
+      return;
     }
-  }, 1000);
+
+    try {
+      const passwordBytes = new TextEncoder().encode(accessPassword.value);
+      const digest = await window.crypto.subtle.digest("SHA-256", passwordBytes);
+      const actualHash = Array.from(new Uint8Array(digest))
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+
+      if (actualHash !== expectedHash.toLowerCase()) {
+        accessFeedback.textContent = "That password was not accepted. Please try again.";
+        accessPassword.select();
+        return;
+      }
+
+      accessFeedback.textContent = "";
+      accessForm.hidden = true;
+      downloadUnlocked.hidden = false;
+      downloadLink.href = file;
+      if (isLocalInstaller) {
+        downloadLink.setAttribute("download", downloadLink.dataset.filename);
+      }
+      startCountdown();
+    } catch (cause) {
+      console.error("Could not verify the download password.", cause);
+      accessFeedback.textContent =
+        "Password verification is unavailable in this browser. Please open this page over HTTPS and try again.";
+    }
+  });
 
   downloadLink.addEventListener("click", () => {
     window.clearInterval(timer);

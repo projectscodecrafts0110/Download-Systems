@@ -7,7 +7,7 @@ window.APP_LIST = [
     releases: [
       {
         version: "0.3.5",
-        downloadUrl: "./downloads/FOMS/FOMS-Setup-0.3.5-win-x64.exe",
+        downloadUrl: "https://github.com/projectscodecrafts0110/Download-Systems/releases/download/v0.3.5-FO/FOMS-Setup-0.3.5-win-x64.exe",
       },
       {
         version: "0.2.5",

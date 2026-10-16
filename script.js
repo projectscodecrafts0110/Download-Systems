@@ -4,8 +4,13 @@
   const filters = document.querySelector("#filters");
   const searchInput = document.querySelector("#search");
   const count = document.querySelector("#app-count");
+  const heroAppCount = document.querySelector("#hero-app-count");
 
   if (!grid || !filters || !searchInput || !count) return;
+
+  if (heroAppCount) {
+    heroAppCount.textContent = String(apps.length).padStart(2, "0");
+  }
 
   const platforms = ["All", ...new Set(apps.flatMap((app) => app.platforms || []))];
   let activePlatform = "All";

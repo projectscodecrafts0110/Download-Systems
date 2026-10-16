@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f5f6f2">
+    <meta name="theme-color" content="#f8f8f6">
     <meta name="robots" content="noindex">
-    <title>Before you download — Deskdrop</title>
+    <title>Before you download — BHS Software Repository</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,20 +13,18 @@
       rel="stylesheet"
     >
     <link rel="stylesheet" href="styles.css">
+    <script src="access-config.js" defer></script>
     <script src="download.js" defer></script>
   </head>
   <body id="top" class="download-page">
     <div class="site-shell">
       <header class="topbar">
-        <a class="brand" href="./" aria-label="Deskdrop home">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none">
-              <rect x="3" y="3" width="26" height="26" rx="8" fill="currentColor"></rect>
-              <path d="M10 11h12M10 16h8M10 21h5" stroke="#F5F6F2" stroke-width="2" stroke-linecap="round"></path>
-              <circle cx="22" cy="21" r="2" fill="#B6F36A"></circle>
-            </svg>
+        <a class="brand" href="./" aria-label="Baguio Holiday Supermart Software Repository home">
+          <img class="brand-logo" src="./assets/bhs-logo.png" alt="Baguio Holiday Supermart">
+          <span class="brand-copy">
+            <strong>BHS</strong>
+            <span>SOFTWARE REPOSITORY</span>
           </span>
-          <span>deskdrop<span class="brand-period">.</span></span>
         </a>
         <a class="topbar-link" href="./">Back to apps <span aria-hidden="true">↗</span></a>
       </header>
@@ -50,6 +48,16 @@
             </ul>
           </div>
 
+          <form class="access-form" id="access-form">
+            <label for="access-password">Enter the download access password</label>
+            <div class="access-input-row">
+              <input id="access-password" name="password" type="password" autocomplete="current-password" required>
+              <button class="hero-cta access-submit" type="submit">Continue</button>
+            </div>
+            <p class="access-feedback" id="access-feedback" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="download-unlocked" id="download-unlocked" hidden>
           <p class="download-status" id="download-status" role="status" aria-live="polite">
             <span id="countdown-intro">Your download will start automatically in</span>
             <span id="countdown">8</span> seconds.
@@ -66,22 +74,20 @@
           <p class="download-error" id="download-error" role="alert" hidden>
             The download link is missing or invalid. Go back to the app list and try again.
           </p>
+          </div>
           <a class="return-link" href="./">← Return to the app collection</a>
         </section>
       </main>
 
       <footer class="footer">
-        <a class="brand footer-brand" href="./">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none">
-              <rect x="3" y="3" width="26" height="26" rx="8" fill="currentColor"></rect>
-              <path d="M10 11h12M10 16h8M10 21h5" stroke="#F5F6F2" stroke-width="2" stroke-linecap="round"></path>
-              <circle cx="22" cy="21" r="2" fill="#B6F36A"></circle>
-            </svg>
+        <a class="brand footer-brand" href="./" aria-label="Baguio Holiday Supermart Software Repository home">
+          <img class="brand-logo" src="./assets/bhs-logo.png" alt="Baguio Holiday Supermart">
+          <span class="brand-copy">
+            <strong>BHS</strong>
+            <span>SOFTWARE REPOSITORY</span>
           </span>
-          <span>deskdrop<span class="brand-period">.</span></span>
         </a>
-        <p>Made with curiosity <span aria-hidden="true">✳</span></p>
+        <p><strong>Harvy Raphael P. Virocel</strong> <span aria-hidden="true">·</span> Programmer · Baguio Holiday Supermart</p>
         <a class="back-to-top" href="#top">Back to top ↑</a>
       </footer>
     </div>

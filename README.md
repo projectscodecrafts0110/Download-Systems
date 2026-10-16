@@ -1,6 +1,8 @@
-# Deskdrop
+# BHS Software Repository
 
-A responsive, static app shelf that works with GitHub Pages. No build step or dependencies are needed.
+A responsive, web-based software repository for Baguio Holiday Supermart. Browse company applications, review releases, and access installers. The site is static and works with GitHub Pages; no build step or dependencies are needed.
+
+The Baguio Holiday Supermart logo is stored at `assets/bhs-logo.png`.
 
 ## Add an app
 
@@ -42,6 +44,15 @@ window.APP_LIST = [
 - Keep each version's installer at a distinct path so adding a newer release does not replace older downloads. GitHub limits individual repository files to 100 MB; use GitHub Releases for larger installers.
 - Download buttons for local `.exe` files open a testing reminder first, then start the download after eight seconds. Visitors can download immediately or cancel the automatic download. Keep the reminder accurate for the app's current testing status.
 - Older app entries using top-level `version` and `downloadUrl` are still supported; add a `releases` array when you want to track release history.
+- The download reminder asks for a password before showing the download button. To configure the prompt, generate a SHA-256 hash in your browser console with:
+
+  ```js
+  const bytes = new TextEncoder().encode(prompt("Enter the password to hash"));
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+  ```
+
+  Copy the resulting hash into `access-config.js` in place of `REPLACE_WITH_SHA256_HASH`. Do not put the plain password in the repository. **This client-side prompt is only a deterrent, not security:** GitHub Pages and the release URLs are public, and visitors can inspect or bypass the JavaScript gate. Do not use it for confidential software or as a substitute for authenticated hosting.
 
 ## Publish with GitHub Pages
 
