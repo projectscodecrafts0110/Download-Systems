@@ -39,7 +39,12 @@
     const platformLabel = (app.platforms || []).join(" · ");
     const status = app.status || "Available";
     const icon = app.icon || "▦";
-    const href = app.downloadUrl || "#";
+    const downloadHref = app.downloadUrl
+      ? `./download.html?${new URLSearchParams({
+          app: app.name || "Desktop app",
+          file: app.downloadUrl,
+        }).toString()}`
+      : "#";
     const isDownloadable = Boolean(app.downloadUrl);
 
     return `
@@ -63,7 +68,7 @@
         <div class="card-bottom">
           <span class="app-category">${escapeHtml(app.category || "Utility")}</span>
           <a class="download-link${isDownloadable ? "" : " link-disabled"}"
-            href="${escapeHtml(href)}"${isDownloadable ? ' target="_blank" rel="noopener noreferrer"' : ' aria-disabled="true" tabindex="-1"'}
+            href="${escapeHtml(downloadHref)}"${isDownloadable ? "" : ' aria-disabled="true" tabindex="-1"'}
             ${isDownloadable ? `aria-label="Get ${escapeHtml(app.name || "app")}"` : 'aria-label="Download link not set" title="Add a downloadUrl in apps.js"'} >
             ${isDownloadable ? "Get app" : "Coming soon"}
             <svg aria-hidden="true" viewBox="0 0 16 16" fill="none">

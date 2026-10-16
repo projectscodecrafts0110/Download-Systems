@@ -832,3 +832,172 @@ p {
     animation-iteration-count: 1 !important;
   }
 }
+
+.download-main {
+  min-height: calc(100vh - 193px);
+  display: grid;
+  place-items: center;
+  padding: 55px 0;
+}
+
+.reminder-card {
+  width: min(100%, 650px);
+  padding: 42px;
+  border: 1px solid #e4e9e0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 18px 55px rgba(39, 54, 40, 0.06);
+}
+
+.reminder-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 25px;
+  border-radius: 50%;
+  background: #fbf0dc;
+  color: #a47735;
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.reminder-card h1 {
+  margin: 10px 0 10px;
+  font-family: var(--display);
+  font-size: clamp(34px, 5vw, 46px);
+  letter-spacing: -2px;
+}
+
+.reminder-card h1 span {
+  color: #8da77d;
+}
+
+.reminder-intro {
+  margin-bottom: 23px;
+  color: #737d72;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.reminder-intro strong {
+  color: var(--ink);
+}
+
+.testing-notice {
+  padding: 18px 19px;
+  border: 1px solid #f0dfbe;
+  border-radius: 7px;
+  background: #fffaf0;
+}
+
+.notice-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 11px;
+  color: #775b32;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.notice-title span {
+  font-size: 15px;
+}
+
+.testing-notice ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 19px;
+  color: #766f61;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.download-status {
+  min-height: 18px;
+  margin: 21px 0 13px;
+  color: #727d72;
+  font-size: 11px;
+}
+
+.download-status span {
+  color: #465b3e;
+  font-family: var(--mono);
+  font-weight: 500;
+}
+
+.download-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 11px;
+}
+
+.download-now {
+  gap: 13px;
+  border: 0;
+  cursor: pointer;
+}
+
+.download-now svg {
+  width: 16px;
+  height: 16px;
+  color: var(--green);
+}
+
+.cancel-download {
+  padding: 10px 12px;
+  border: 1px solid #e5e9e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #737d72;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.cancel-download:hover:not(:disabled) {
+  border-color: #cbd5c5;
+  color: var(--ink);
+}
+
+.cancel-download:disabled {
+  color: #90988e;
+  cursor: default;
+}
+
+.download-error {
+  margin: 15px 0 0;
+  color: #a34d3f;
+  font-size: 12px;
+}
+
+.return-link {
+  display: inline-block;
+  margin-top: 23px;
+  color: #7c8778;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.return-link:hover {
+  color: #4b653d;
+}
+
+@media (max-width: 620px) {
+  .download-main {
+    min-height: calc(100vh - 164px);
+    padding: 35px 0;
+  }
+
+  .reminder-card {
+    padding: 26px 20px;
+  }
+
+  .testing-notice {
+    padding: 15px;
+  }
+}

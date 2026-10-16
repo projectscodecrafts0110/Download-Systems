@@ -26,6 +26,7 @@ window.APP_LIST = [
 - `platforms` is an array, for example `["Windows"]` or `["Windows", "macOS"]`. Its values become the platform filters.
 - `version`, `category`, `status`, `icon`, and `iconBackground` are optional.
 - Put the `.exe` in the repository (for example, in a `downloads` folder) and use the matching path in `downloadUrl`. GitHub limits individual repository files to 100 MB; use GitHub Releases for larger installers.
+- Download buttons for local `.exe` files open a testing reminder first, then start the download after eight seconds. Visitors can download immediately or cancel the automatic download. Keep the reminder accurate for the app's current testing status.
 
 ## Publish with GitHub Pages
 

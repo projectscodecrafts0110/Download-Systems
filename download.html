@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f6f2">
+    <meta name="robots" content="noindex">
+    <title>Before you download — Deskdrop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+    <script src="download.js" defer></script>
+  </head>
+  <body id="top" class="download-page">
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Deskdrop home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="3" y="3" width="26" height="26" rx="8" fill="currentColor"></rect>
+              <path d="M10 11h12M10 16h8M10 21h5" stroke="#F5F6F2" stroke-width="2" stroke-linecap="round"></path>
+              <circle cx="22" cy="21" r="2" fill="#B6F36A"></circle>
+            </svg>
+          </span>
+          <span>deskdrop<span class="brand-period">.</span></span>
+        </a>
+        <a class="topbar-link" href="./">Back to apps <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <main class="download-main">
+        <section class="reminder-card" aria-labelledby="reminder-title">
+          <div class="reminder-icon" aria-hidden="true">!</div>
+          <div class="eyebrow section-eyebrow">A NOTE ABOUT TEST SOFTWARE</div>
+          <h1 id="reminder-title">A quick heads-up<span>.</span></h1>
+          <p class="reminder-intro">
+            <strong id="app-name">This app</strong> is provided for testing. Please use it with care.
+          </p>
+
+          <div class="testing-notice">
+            <div class="notice-title"><span aria-hidden="true">⚠</span> Testing software — not intended for production use</div>
+            <ul>
+              <li>Do not rely on it for live business operations, important work, or critical decisions.</li>
+              <li>Use sample data only. Avoid entering real personal, customer, financial, or confidential information.</li>
+              <li>Testing software can contain bugs, change unexpectedly, or lose data. Keep separate backups of anything important.</li>
+              <li>Install and test it only in an environment where unexpected behavior will not disrupt your work or other systems.</li>
+            </ul>
+          </div>
+
+          <p class="download-status" id="download-status" role="status" aria-live="polite">
+            Your download will start automatically in <span id="countdown">8</span> seconds.
+          </p>
+          <div class="download-actions">
+            <a class="hero-cta download-now" id="download-now" href="#">
+              Download now
+              <svg aria-hidden="true" viewBox="0 0 16 16" fill="none">
+                <path d="M8 2.5v7m0 0 2.7-2.7M8 9.5 5.3 6.8M3 10.5v2A1.5 1.5 0 0 0 4.5 14h7a1.5 1.5 0 0 0 1.5-1.5v-2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+            <button class="cancel-download" id="cancel-download" type="button">Cancel automatic download</button>
+          </div>
+          <p class="download-error" id="download-error" role="alert" hidden>
+            The download link is missing or invalid. Go back to the app list and try again.
+          </p>
+          <a class="return-link" href="./">← Return to the app collection</a>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <a class="brand footer-brand" href="./">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="3" y="3" width="26" height="26" rx="8" fill="currentColor"></rect>
+              <path d="M10 11h12M10 16h8M10 21h5" stroke="#F5F6F2" stroke-width="2" stroke-linecap="round"></path>
+              <circle cx="22" cy="21" r="2" fill="#B6F36A"></circle>
+            </svg>
+          </span>
+          <span>deskdrop<span class="brand-period">.</span></span>
+        </a>
+        <p>Made with curiosity <span aria-hidden="true">✳</span></p>
+        <a class="back-to-top" href="#top">Back to top ↑</a>
+      </footer>
+    </div>
+  </body>
+</html>
